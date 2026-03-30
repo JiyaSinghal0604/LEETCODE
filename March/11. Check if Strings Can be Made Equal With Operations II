@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool checkStrings(string s1, string s2) {
+        unordered_map<char,int>e, o;
+        for(int i=0; i<s1.size(); i++){
+            if(i%2==0){
+                e[s1[i]]++;
+                e[s2[i]]--;
+            }else{
+                o[s1[i]]++;
+                o[s2[i]]--;
+            }
+        }
+        for(auto x:e){
+            if(x.second>0) return false;
+        }
+        for(auto x:o){
+            if(x.second>0) return false;
+        }
+        return true;
+    }
+};
