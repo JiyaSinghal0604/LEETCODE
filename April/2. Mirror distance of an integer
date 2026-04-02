@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int mirrorDistance(int n) {
+        int rev=0, x=n;
+        while(n!=0){
+            int d=n%10;
+            if(rev>INT_MAX/10 || rev<INT_MIN/10) return n;
+            rev = rev*10 + d;
+            n/=10;
+        }
+        return abs(x-rev);
+    }
+};
