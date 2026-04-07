@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string interpret(string command) {
+        int i;
+        for (i = 0; i < command.size() - 1; i++) {
+            if (command[i] == '(') {
+                if (command[i + 1] != ')'){
+                    command.erase(i, 1);
+                    i--;
+                }
+                else
+                    command[i] = 'o';
+            } else if (command[i] == ')'){
+                command.erase(i, 1);
+                i--;
+            }
+            else
+                continue;
+        }
+        if (command[i] == ')')
+            command.erase(i, 1);
+        return command;
+    }
+};
