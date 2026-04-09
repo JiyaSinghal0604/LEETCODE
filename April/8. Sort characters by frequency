@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string frequencySort(string s) {
+        int n=s.size();
+        unordered_map<char,int> freq;
+        for(auto x: s){
+            freq[x]++;
+        }
+        vector<pair<int,char>> f;
+        for(auto x: freq){
+            f.push_back({x.second, x.first});
+        }
+        sort(f.rbegin(),f.rend());
+        string ans;
+        for(auto x:f){
+            int a=x.first;
+            while(a--){
+                ans.push_back(x.second);
+            }
+        }
+        return ans;
+    }
+};
