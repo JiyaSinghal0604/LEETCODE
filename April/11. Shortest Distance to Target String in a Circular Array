@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int closestTarget(vector<string>& words, string target, int startIndex) {
+        int ans = INT_MAX;
+        int n = words.size();
+        if(find(words.begin(), words.end(), target)==words.end()) return -1;
+        for (int i = 0; i < n; i++) {
+            int fwd = (startIndex + i) % n;
+            if (words[fwd] == target)
+                ans = min(ans, i);
+            int bwd = (startIndex - i + n) % n;
+            if (words[bwd] == target)
+                ans = min(ans, i);
+        }
+        return ans;
+    }
+};
