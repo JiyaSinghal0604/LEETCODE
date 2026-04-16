@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> solveQueries(vector<int>& nums, vector<int>& queries) {
+        int n = nums.size(), m = queries.size();
+        vector<int> ans;
+        unordered_map<int, vector<int>> mp;
+        for (int i = 0; i < n; i++) {
+            mp[nums[i]].push_back(i);
+        }
+        for (int x : queries) {
+            int val = nums[x];
+            vector<int>& v = mp[val];
+            if (v.size() == 1) {
+                ans.push_back(-1);
+                continue;
+            }
+            int pos = lower_bound(v.begin(), v.end(), x) - v.begin();
+            int prev = (pos - 1 + v.size()) % v.size(),
+                next = (pos + 1) % v.size();
+            int d1 = abs(v[prev] - x), d2 = abs(v[next] - x);
+            int res = min(min(d1, n - d1), min(d2, n - d2));
+            ans.push_back(res);
+        }
+        return ans;
+    }
+};
