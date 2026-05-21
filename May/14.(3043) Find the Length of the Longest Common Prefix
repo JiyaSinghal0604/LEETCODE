@@ -1,1 +1,26 @@
 
+class Solution {
+public:
+    void createpref(vector<int>& arr, unordered_set<string>& s) {
+        for (int x : arr) {
+            string pref = "", st = to_string(x);
+            for (char c : st) {
+                pref += c;
+                s.insert(pref);
+            }
+        }
+    }
+    int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
+        unordered_set<string> s1, s2;
+        createpref(arr1, s1);
+        createpref(arr2, s2);
+        int ans = 0;
+        for (string x : s1) {
+            if (s2.count(x)) {
+                if (ans == 0 || x.size() > ans)
+                    ans = x.size();
+            }
+        }
+        return ans;
+    }
+};
