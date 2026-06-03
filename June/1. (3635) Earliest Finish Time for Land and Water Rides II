@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int solve(vector<int>& r1, vector<int>& t1, vector<int>& r2, vector<int>& t2){
+        int f1=INT_MAX;
+        for(int i=0; i<r1.size(); i++){
+            f1=min(f1, r1[i]+t1[i]);
+        }
+        int f2=INT_MAX;
+        for(int i=0; i<r2.size(); i++){
+            f2=min(f2, t2[i]+max(r2[i], f1));
+        }
+        return f2;
+    }
+    int earliestFinishTime(vector<int>& landStartTime, vector<int>& landDuration, vector<int>& waterStartTime, vector<int>& waterDuration) {
+        return min(solve(landStartTime, landDuration, waterStartTime, waterDuration), solve(waterStartTime, waterDuration, landStartTime, landDuration));
+    }
+};
