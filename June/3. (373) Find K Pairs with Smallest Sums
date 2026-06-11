@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2,int k) {
+        // auto cmp=[](const uple<int, int, int>& a, const tuple<int, int, int>& b){
+        //     return get<0>(a) > get<0>(b);
+        // }
+        // priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, decltype(cmp)> pq(cmp);
+        vector<vector<int>> res;
+        priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<>> pq;
+        set<pair<int, int>> seen;
+        seen.insert({0,0});
+        pq.push({nums1[0]+nums2[0], 0, 0});
+        while(!pq.empty() && res.size()<k){
+            auto [sum, i, j]=pq.top();
+            pq.pop();
+            res.push_back({nums1[i],nums2[j]});
+            if(j+1<nums2.size() && !seen.count({i, j+1})){
+                pq.push({nums1[i]+nums2[j+1], i, j+1});
+                seen.insert({i, j+1});
+            }
+            if(i+1<nums1.size() && !seen.count({i+1, j})){
+                pq.push({nums1[i+1]+nums2[j], i+1, j});
+                seen.insert({i+1, j});
+            }
+        }
+        return res;
+    }
+};
