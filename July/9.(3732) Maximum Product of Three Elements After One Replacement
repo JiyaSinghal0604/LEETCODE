@@ -1,0 +1,29 @@
+class Solution {
+public:
+    long long maxProduct(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        nums[0]=abs(nums[0]);
+        nums[1]=abs(nums[1]);
+        sort(nums.begin(), nums.end());
+        int n=nums.size();
+        long long ans=1e5;
+        ans*=1LL*nums[n-1]*nums[n-2];
+        return ans;
+    }
+};
+class Solution {
+public:
+//optimised
+    long long maxProduct(vector<int>& nums) {
+        int m=INT_MIN, s=INT_MIN, n=nums.size();
+        for(int i=0; i<n; i++){
+            if(abs(nums[i])>m){
+                s=m;
+                m=abs(nums[i]);
+            }else s=max(s, abs(nums[i]));
+        }
+        long long ans=1e5;
+        ans*=1LL*m*s;
+        return ans;
+    }
+};
