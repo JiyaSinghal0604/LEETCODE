@@ -1,0 +1,18 @@
+class Solution {
+public:
+    string smallestPalindrome(string s) {
+        int n=s.size();
+        if(n%2==0){
+            sort(s.begin(), s.begin()+(n/2));
+        }else{
+            sort(s.begin(), s.begin()+n/2);
+        }
+        int l=0, h=n-1;
+        while(l<h){
+            s[h]=s[l];
+            l++;
+            h--;
+        }
+        return s;
+    }
+};
