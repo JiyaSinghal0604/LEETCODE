@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int longestSubsequence(vector<int>& nums) {
+        int f=nums[0], xr=nums[0];
+        for(int i=1; i<nums.size(); i++){
+            xr^=nums[i];
+            if(nums[i]!=0) f=1;
+        }
+        if(!f) return 0;
+        if(xr==0) return nums.size()-1;
+        else return nums.size();
+    }
+};
